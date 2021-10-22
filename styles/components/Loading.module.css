@@ -1,0 +1,11 @@
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.container > span {
+  color: #2196f3;
+}
