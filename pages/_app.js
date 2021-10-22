@@ -51,7 +51,7 @@ export default function App(props) {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
       </Head>
-      <Component authed={!!auth.currentUser} {...pageProps} />
+      <Component authed={authed} {...pageProps} />
     </>
   );
 }
