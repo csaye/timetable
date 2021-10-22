@@ -5,6 +5,11 @@ import { firebaseConfig } from '../util/firebaseConfig';
 
 import '../styles/globals.css';
 
+// site meta
+const title = "Timetable";
+const description = "Centralized schedule management.";
+const image = "img/station.jpg";
+
 // initialize firebase
 if (!getApps().length) initializeApp(firebaseConfig);
 
@@ -14,11 +19,23 @@ export default function App(props) {
   return (
     <>
       <Head>
-        <title>Timetable</title>
-        <meta name="description" content="Centralized schedule management." />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        {/* favicons */}
         <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png" />
+        {/* open graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={image} />
+        {/* twitter */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@csaye_" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={image} />
       </Head>
       <Component {...pageProps} />
     </>
