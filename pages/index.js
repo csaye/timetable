@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { signInWithGoogle } from '../util/signInWithGoogle';
+import signInWithGoogle from '../util/signInWithGoogle';
 
 import styles from '../styles/pages/Index.module.css';
 
