@@ -1,6 +1,8 @@
 import Head from 'next/head';
 
+import { useEffect, useState } from 'react';
 import { initializeApp, getApps } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 import { firebaseConfig } from '../util/firebaseConfig';
 
 import '../styles/globals.css';
@@ -15,6 +17,18 @@ if (!getApps().length) initializeApp(firebaseConfig);
 
 export default function App(props) {
   const { Component, pageProps } = props;
+
+  const auth = getAuth();
+
+  const [authed, setAuthed] = useState(undefined);
+
+  // listen for user auth
+  useEffect(() => {
+    const authListener = auth.onAuthStateChanged(() => {
+      setAuthed(!!auth.currentUser);
+    });
+    return () => authListener();
+  }, []);
 
   return (
     <>
@@ -37,7 +51,7 @@ export default function App(props) {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
       </Head>
-      <Component {...pageProps} />
+      <Component authed={!!auth.currentUser} {...pageProps} />
     </>
   );
 }
