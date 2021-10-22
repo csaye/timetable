@@ -6,8 +6,8 @@ import styles from '../styles/Index.module.css';
 
 export default function Index() {
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.center}>
         <Image
           src="/img/logo.png"
           width="48"
