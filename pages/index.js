@@ -17,12 +17,14 @@ export default function Index(props) {
   return (
     <div className={styles.container}>
       <div className={styles.center}>
-        <Image
-          src="/img/logo.png"
-          width="48"
-          height="48"
-        />
-        <h1>Timetable</h1>
+        <h1>
+          <Image
+            src="/img/logo.png"
+            width="48"
+            height="48"
+          />
+          Timetable
+        </h1>
         <button onClick={signInWithGoogle}>
           Sign in with Google
         </button>

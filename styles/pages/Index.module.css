@@ -3,11 +3,15 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  background-image: url('/img/station.jpg');
+  background-size: cover;
+  background-position: center center;
 }
 
 .center {
   text-align: center;
   background: #efefef;
+  border-radius: 20px;
   padding: 20px 60px;
 }
 
