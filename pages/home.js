@@ -1,9 +1,8 @@
-import Image from 'next/image';
+import Header from '../components/Header';
 import Router from 'next/router';
 import Loading from '../components/Loading';
 
 import { useEffect, useState } from 'react';
-import { getAuth, signOut } from 'firebase/auth';
 
 import styles from '../styles/pages/Home.module.css';
 
@@ -14,8 +13,6 @@ const dayNames = [
 
 export default function Home(props) {
   const { authed } = props;
-
-  const auth = getAuth();
 
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
@@ -66,18 +63,7 @@ export default function Home(props) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <Image
-          src="/img/logo.png"
-          width="48"
-          height="48"
-          alt="logo"
-        />
-        Timetable
-        <button onClick={() => signOut(auth)}>
-          Sign Out
-        </button>
-      </div>
+      <Header />
       <button onClick={backMonth}>{'<'}</button>
       <button onClick={forwardMonth}>{'>'}</button>
       <h1>
