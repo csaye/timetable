@@ -14,6 +14,8 @@ const dayNames = [
 export default function Home(props) {
   const { authed } = props;
 
+  const auth = getAuth();
+
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
 
@@ -23,9 +25,15 @@ export default function Home(props) {
     return firstOfMonth.getDay();
   }
 
-  const fillers = Array(monthOffset()).fill(0);
+  // returns number of days in the current month
+  function daysInMonth() {
+    const nextMonth = month + 1;
+    const endOfMonth = new Date(year, nextMonth, 0);
+    return endOfMonth.getDate();
+  }
 
-  const auth = getAuth();
+  const fillers = Array(monthOffset()).fill(0);
+  const days = Array(daysInMonth()).fill(0).map((val, i) => i + 1);
 
   // listen for routing
   useEffect(() => {
@@ -51,6 +59,13 @@ export default function Home(props) {
         {
           fillers.map((filler, i) =>
             <span key={i} />
+          )
+        }
+        {
+          days.map((day, i) =>
+            <p key={i}>
+              {day}
+            </p>
           )
         }
       </div>
