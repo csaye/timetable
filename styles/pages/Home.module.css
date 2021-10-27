@@ -1,3 +1,9 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;

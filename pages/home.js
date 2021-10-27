@@ -1,5 +1,6 @@
-import Loading from '../components/Loading';
+import Image from 'next/image';
 import Router from 'next/router';
+import Loading from '../components/Loading';
 
 import { useEffect, useState } from 'react';
 import { getAuth, signOut } from 'firebase/auth';
@@ -64,12 +65,26 @@ export default function Home(props) {
   if (!authed) return <Loading />;
 
   return (
-    <div>
-      <button onClick={() => signOut(auth)}>
-        Sign Out
-      </button>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <Image
+          src="/img/logo.png"
+          width="48"
+          height="48"
+          alt="logo"
+        />
+        Timetable
+        <button onClick={() => signOut(auth)}>
+          Sign Out
+        </button>
+      </div>
       <button onClick={backMonth}>{'<'}</button>
       <button onClick={forwardMonth}>{'>'}</button>
+      <h1>
+        {new Date(year, month, 1).toLocaleString('default', { month: 'long' })}
+        {' '}
+        {year}
+      </h1>
       <div className={styles.calendar}>
         {
           dayNames.map((dayName, i) =>
