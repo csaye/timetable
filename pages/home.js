@@ -19,6 +19,26 @@ export default function Home(props) {
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
 
+  // moves calendar back one month
+  function backMonth() {
+    if (month === 0) {
+      setMonth(11);
+      setYear(year - 1);
+    } else {
+      setMonth(month - 1);
+    }
+  }
+
+  // moves calendar forward one month
+  function forwardMonth() {
+    if (month === 11) {
+      setMonth(0);
+      setYear(year + 1);
+    } else {
+      setMonth(month + 1);
+    }
+  }
+
   // returns the offset of the current month
   function monthOffset() {
     const firstOfMonth = new Date(year, month, 1);
@@ -48,6 +68,8 @@ export default function Home(props) {
       <button onClick={() => signOut(auth)}>
         Sign Out
       </button>
+      <button onClick={backMonth}>{'<'}</button>
+      <button onClick={forwardMonth}>{'>'}</button>
       <div className={styles.calendar}>
         {
           dayNames.map((dayName, i) =>
