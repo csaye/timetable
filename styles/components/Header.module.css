@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.container > div {
+  margin: 0 10px!important;
+}
+
+.container > button {
+  margin-right: 10px;
+}
