@@ -1,0 +1,13 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.box {
+  width: calc(100% / 7 - 20px);
+  height: 60px;
+  background: #ddd;
+  margin: 10px;
+  display: flex;
+}

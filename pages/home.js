@@ -48,24 +48,24 @@ export default function Home(props) {
       <button onClick={() => signOut(auth)}>
         Sign Out
       </button>
-      <div>
+      <div className={styles.calendar}>
         {
           dayNames.map((dayName, i) =>
-            <div key={i}>
+            <div className={styles.box} key={i}>
               <h3>{dayName}</h3>
             </div>
           )
         }
         {
           fillers.map((filler, i) =>
-            <span key={i} />
+            <span className={styles.box} key={i} />
           )
         }
         {
           days.map((day, i) =>
-            <p key={i}>
+            <div className={styles.box} key={i}>
               {day}
-            </p>
+            </div>
           )
         }
       </div>
