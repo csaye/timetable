@@ -6,6 +6,10 @@ import { getAuth, signOut } from 'firebase/auth';
 
 import styles from '../styles/pages/Home.module.css';
 
+const dayNames = [
+  'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+];
+
 export default function Home(props) {
   const { authed } = props;
 
@@ -24,6 +28,15 @@ export default function Home(props) {
       <button onClick={() => signOut(auth)}>
         Sign Out
       </button>
+      <div>
+        {
+          dayNames.map((dayName, i) =>
+            <div key={i}>
+              <h3>{dayName}</h3>
+            </div>
+          )
+        }
+      </div>
     </div>
   );
 }
