@@ -1,6 +1,7 @@
 import Header from '../components/Header';
-import Router from 'next/router';
 import Loading from '../components/Loading';
+import Modal from '../components/Modal';
+import Router from 'next/router';
 
 import { useEffect, useState } from 'react';
 
@@ -13,6 +14,11 @@ const dayNames = [
 
 export default function Home(props) {
   const { authed } = props;
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [title, setTitle] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
 
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
@@ -66,6 +72,31 @@ export default function Home(props) {
       <Header />
       <button onClick={backMonth}>{'<'}</button>
       <button onClick={forwardMonth}>{'>'}</button>
+      <button onClick={() => setModalOpen(true)}>+</button>
+      <Modal open={modalOpen} setOpen={setModalOpen}>
+        <h1>New Todo</h1>
+        <form>
+          <input
+            placeholder="title"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            required
+          />
+          <input
+            type="date"
+            value={date}
+            onChange={e => setDate(e.target.value)}
+            required
+          />
+          <input
+            type="time"
+            value={time}
+            onChange={e => setTime(e.target.value)}
+            required
+          />
+        </form>
+        <button>Create</button>
+      </Modal>
       <h1>
         {new Date(year, month, 1).toLocaleString('default', { month: 'long' })}
         {' '}
