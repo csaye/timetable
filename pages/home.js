@@ -1,13 +1,9 @@
 import Header from '../components/Header';
 import Loading from '../components/Loading';
-import Modal from '../components/Modal';
 import Todos from '../components/Todos';
 import Router from 'next/router';
 
-import { getAuth } from 'firebase/auth';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { useCollectionData } from 'react-firebase9-hooks/firestore';
 
 import styles from '../styles/pages/Home.module.css';
 
@@ -18,9 +14,6 @@ const dayNames = [
 
 export default function Home(props) {
   const { authed } = props;
-
-  const auth = getAuth();
-  const db = getFirestore();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState('');
@@ -70,21 +63,6 @@ export default function Home(props) {
     if (authed === false) Router.push('/');
   }, [authed]);
 
-  // creates new todo in firebase
-  async function createTodo() {
-    await addDoc(todosRef, {
-      title: title,
-      date: new Date(date).getTime(),
-      uid: auth.currentUser.uid
-    });
-  }
-
-  // resets modal
-  function resetModal() {
-    setTitle('');
-    setDate('');
-  }
-
   // return if loading
   if (!authed) return <Loading />;
 
@@ -93,36 +71,7 @@ export default function Home(props) {
       <Header />
       <button onClick={backMonth}>{'<'}</button>
       <button onClick={forwardMonth}>{'>'}</button>
-      <button onClick={() => {
-        resetModal();
-        setModalOpen(true);
-      }}>+</button>
       <Todos />
-      <Modal open={modalOpen} setOpen={setModalOpen}>
-        <h1>New Todo</h1>
-        <form
-          className={styles.todoform}
-          onSubmit={e => {
-            e.preventDefault();
-            createTodo();
-            setModalOpen(false);
-          }}
-        >
-          <input
-            placeholder="title"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            required
-          />
-          <input
-            type="date"
-            value={date}
-            onChange={e => setDate(e.target.value)}
-            required
-          />
-          <button className="graybutton">Create</button>
-        </form>
-      </Modal>
       <h1>
         {new Date(year, month, 1).toLocaleString('default', { month: 'long' })}
         {' '}
