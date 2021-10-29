@@ -1,6 +1,7 @@
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import Todos from '../components/Todos';
+import Day from '../components/Day';
 import Router from 'next/router';
 
 import { useEffect, useState } from 'react';
@@ -92,9 +93,12 @@ export default function Home(props) {
         }
         {
           days.map((day, i) =>
-            <div className={styles.box} key={i}>
-              {day}
-            </div>
+            <Day
+              day={day}
+              month={month}
+              year={year}
+              key={i}
+            />
           )
         }
       </div>
