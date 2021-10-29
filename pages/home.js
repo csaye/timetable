@@ -3,6 +3,7 @@ import Loading from '../components/Loading';
 import Modal from '../components/Modal';
 import Router from 'next/router';
 
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
 import styles from '../styles/pages/Home.module.css';
@@ -15,6 +16,8 @@ const dayNames = [
 export default function Home(props) {
   const { authed } = props;
 
+  const db = getFirestore();
+
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
@@ -22,6 +25,8 @@ export default function Home(props) {
 
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
+
+  const todosRef = collection(db, 'todos');
 
   // moves calendar back one month
   function backMonth() {
@@ -64,6 +69,14 @@ export default function Home(props) {
     if (authed === false) Router.push('/');
   }, [authed]);
 
+  // creates new todo in firebase
+  async function createTodo() {
+    await addDoc(todosRef, {
+      title: title,
+      due: new Date(`${date} ${time}`).getTime()
+    });
+  }
+
   // return if loading
   if (!authed) return <Loading />;
 
@@ -75,7 +88,10 @@ export default function Home(props) {
       <button onClick={() => setModalOpen(true)}>+</button>
       <Modal open={modalOpen} setOpen={setModalOpen}>
         <h1>New Todo</h1>
-        <form>
+        <form onSubmit={e => {
+          e.preventDefault();
+          createTodo();
+        }}>
           <input
             placeholder="title"
             value={title}
@@ -94,8 +110,8 @@ export default function Home(props) {
             onChange={e => setTime(e.target.value)}
             required
           />
+          <button>Create</button>
         </form>
-        <button>Create</button>
       </Modal>
       <h1>
         {new Date(year, month, 1).toLocaleString('default', { month: 'long' })}
