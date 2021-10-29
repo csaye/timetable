@@ -7,6 +7,8 @@ import {
 import { useCollectionData } from 'react-firebase9-hooks/firestore';
 import { useState } from 'react';
 
+import styles from '../styles/components/Todos.module.css';
+
 export default function Todos() {
   const auth = getAuth();
   const db = getFirestore();
@@ -42,17 +44,20 @@ export default function Todos() {
         resetModal();
         setModalOpen(true);
       }}>+</button>
-      {
-        todos &&
-        todos.map(todo =>
-          <div key={todo.id}>
-            {todo.title}
-          </div>
-        )
-      }
+      <div className={styles.todos}>
+        {
+          todos &&
+          todos.map(todo =>
+            <div key={todo.id}>
+              {todo.title}
+            </div>
+          )
+        }
+      </div>
       <Modal open={modalOpen} setOpen={setModalOpen}>
         <h1>New Todo</h1>
         <form
+          className={styles.todoform}
           onSubmit={e => {
             e.preventDefault();
             createTodo();
@@ -71,7 +76,7 @@ export default function Todos() {
             onChange={e => setDate(e.target.value)}
             required
           />
-          <button>Create</button>
+          <button className="graybutton">Create</button>
         </form>
       </Modal>
     </div>
