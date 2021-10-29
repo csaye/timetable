@@ -1,4 +1,5 @@
 import Modal from './Modal';
+import Todo from './Todo';
 
 import { getAuth } from 'firebase/auth';
 import {
@@ -25,11 +26,8 @@ export default function Todos() {
 
   // creates new todo in firebase
   async function createTodo() {
-    await addDoc(todosRef, {
-      title: title,
-      date: new Date(date).getTime(),
-      uid: auth.currentUser.uid
-    });
+    const uid = auth.currentUser.uid;
+    await addDoc(todosRef, { title, date, uid });
   }
 
   // resets modal
@@ -48,9 +46,7 @@ export default function Todos() {
         {
           todos &&
           todos.map(todo =>
-            <div key={todo.id}>
-              {todo.title}
-            </div>
+            <Todo {...todo} key={todo.id} />
           )
         }
       </div>
