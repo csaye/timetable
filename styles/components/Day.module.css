@@ -1,3 +1,14 @@
 .container {
   padding: 10px;
+  overflow: scroll;
+}
+
+.container > h1 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.todos {
+  display: flex;
+  flex-direction: column;
 }
