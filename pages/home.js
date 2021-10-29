@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import Todos from '../components/Todos';
-import Day from '../components/Day';
+import Days from '../components/Days';
 import Router from 'next/router';
 
 import { useEffect, useState } from 'react';
@@ -15,10 +15,6 @@ const dayNames = [
 
 export default function Home(props) {
   const { authed } = props;
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
 
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
@@ -49,15 +45,7 @@ export default function Home(props) {
     return firstOfMonth.getDay();
   }
 
-  // returns number of days in the current month
-  function daysInMonth() {
-    const nextMonth = month + 1;
-    const endOfMonth = new Date(year, nextMonth, 0);
-    return endOfMonth.getDate();
-  }
-
   const fillers = Array(monthOffset()).fill(0);
-  const days = Array(daysInMonth()).fill(0).map((val, i) => i + 1);
 
   // listen for routing
   useEffect(() => {
@@ -91,16 +79,7 @@ export default function Home(props) {
             <span className="daybox" key={i} />
           )
         }
-        {
-          days.map((day, i) =>
-            <Day
-              day={day}
-              month={month}
-              year={year}
-              key={i}
-            />
-          )
-        }
+        <Days month={month} year={year} />
       </div>
     </div>
   );
