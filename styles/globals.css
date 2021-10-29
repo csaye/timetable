@@ -25,3 +25,14 @@ button {
 .flexfill {
   flex-grow: 1;
 }
+
+.graybutton {
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
+}
+
+.graybutton:hover {
+  background: #ddd;
+}

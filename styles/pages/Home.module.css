@@ -11,3 +11,13 @@
   margin: 10px;
   display: flex;
 }
+
+.todoform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todoform > button {
+  margin-top: 10px;
+}

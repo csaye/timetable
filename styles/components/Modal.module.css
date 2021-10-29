@@ -6,7 +6,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 2px solid #333;
   border-radius: 10px;
   padding: 20px 40px;
   box-shadow: 0 0 10px #000;
@@ -26,7 +25,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 2px solid #333;
+  border: 0;
+  box-shadow: 0 0 10px #000;
   background: #eee;
   color: #000;
 }

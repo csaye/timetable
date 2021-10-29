@@ -88,7 +88,7 @@ export default function Home(props) {
       <button onClick={() => setModalOpen(true)}>+</button>
       <Modal open={modalOpen} setOpen={setModalOpen}>
         <h1>New Todo</h1>
-        <form onSubmit={e => {
+        <form className={styles.todoform} onSubmit={e => {
           e.preventDefault();
           createTodo();
         }}>
@@ -110,7 +110,7 @@ export default function Home(props) {
             onChange={e => setTime(e.target.value)}
             required
           />
-          <button>Create</button>
+          <button className="graybutton">Create</button>
         </form>
       </Modal>
       <h1>
