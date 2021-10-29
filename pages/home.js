@@ -81,14 +81,14 @@ export default function Home(props) {
       <div className={styles.calendar}>
         {
           dayNames.map((dayName, i) =>
-            <div className={styles.box} key={i}>
+            <div className="daybox" key={i}>
               <h3>{dayName}</h3>
             </div>
           )
         }
         {
           fillers.map((filler, i) =>
-            <span className={styles.box} key={i} />
+            <span className="daybox" key={i} />
           )
         }
         {

@@ -3,21 +3,3 @@
   flex-wrap: wrap;
   margin: 10px;
 }
-
-.box {
-  width: calc(100% / 7 - 20px);
-  height: 60px;
-  background: #ddd;
-  margin: 10px;
-  display: flex;
-}
-
-.todoform {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.todoform > button {
-  margin-top: 10px;
-}

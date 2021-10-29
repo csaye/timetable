@@ -36,3 +36,11 @@ button {
 .graybutton:hover {
   background: #ddd;
 }
+
+.daybox {
+  width: calc(100% / 7 - 20px);
+  height: 60px;
+  background: #ddd;
+  margin: 10px;
+  display: flex;
+}
