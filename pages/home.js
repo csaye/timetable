@@ -1,10 +1,11 @@
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import Modal from '../components/Modal';
+import Todos from '../components/Todos';
 import Router from 'next/router';
 
 import { getAuth } from 'firebase/auth';
-import { getFirestore, collection, addDoc, query, where } from 'firebase/firestore';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useCollectionData } from 'react-firebase9-hooks/firestore';
 
@@ -27,11 +28,6 @@ export default function Home(props) {
 
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
-
-  const uid = auth.currentUser?.uid;
-  const todosRef = collection(db, 'todos');
-  const todosQuery = query(todosRef, where('uid', '==', uid ?? null));
-  const [todos] = useCollectionData(todosQuery, { idField: 'id' });
 
   // moves calendar back one month
   function backMonth() {
@@ -101,6 +97,7 @@ export default function Home(props) {
         resetModal();
         setModalOpen(true);
       }}>+</button>
+      <Todos />
       <Modal open={modalOpen} setOpen={setModalOpen}>
         <h1>New Todo</h1>
         <form
@@ -126,14 +123,6 @@ export default function Home(props) {
           <button className="graybutton">Create</button>
         </form>
       </Modal>
-      {
-        todos &&
-        todos.map(todo =>
-          <div key={todo.id}>
-            {todo.title}
-          </div>
-        )
-      }
       <h1>
         {new Date(year, month, 1).toLocaleString('default', { month: 'long' })}
         {' '}
