@@ -3,6 +3,10 @@
   overflow: scroll;
 }
 
+.container.selected {
+  background: #999;
+}
+
 .container > h1 {
   font-size: 16px;
   margin: 0;

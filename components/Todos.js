@@ -3,12 +3,14 @@ import Todo from './Todo';
 
 import { getAuth } from 'firebase/auth';
 import {
-  getFirestore, collection, query, where, addDoc
+  getFirestore, collection, query, where, orderBy, addDoc
 } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase9-hooks/firestore';
 import { useState } from 'react';
 
 import styles from '../styles/components/Todos.module.css';
+
+const now = new Date();
 
 export default function Todos() {
   const auth = getAuth();
@@ -21,7 +23,7 @@ export default function Todos() {
   // get todos
   const uid = auth.currentUser.uid;
   const todosRef = collection(db, 'todos');
-  const todosQuery = query(todosRef, where('uid', '==', uid));
+  const todosQuery = query(todosRef, where('uid', '==', uid), orderBy('date'));
   const [todos] = useCollectionData(todosQuery, { idField: 'id' });
 
   // creates new todo in firebase
@@ -45,7 +47,7 @@ export default function Todos() {
       <div className={styles.todos}>
         {
           todos &&
-          todos.map(todo =>
+          todos.filter(todo => new Date(todo.date) > now).map(todo =>
             <Todo {...todo} key={todo.id} />
           )
         }
