@@ -3,6 +3,7 @@
   margin: 10px;
   padding: 20px;
   border-radius: 10px;
+  position: relative;
 }
 
 .container > h1 {
@@ -12,4 +13,23 @@
 
 .container > p {
   margin: 0;
+}
+
+.deletebutton {
+  position: absolute;
+  right: 8px;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border: 0;
+  background: transparent;
+  opacity: 0;
+}
+
+.container:hover > .deletebutton {
+  opacity: 1;
+}
+
+.deletebutton:hover {
+  color: #2196f3;
 }

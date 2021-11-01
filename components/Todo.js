@@ -51,8 +51,11 @@ export default function Todo(props) {
       <h1>{title}</h1>
       <p>{date}</p>
       <Countdown />
-      <button onClick={deleteTodo}>
-        <DeleteIcon />
+      <button
+        className={styles.deletebutton}
+        onClick={deleteTodo}
+      >
+        <DeleteIcon fontSize="small" />
       </button>
     </div>
   );
