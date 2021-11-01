@@ -1,6 +1,9 @@
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import styles from '../styles/components/Todo.module.css';
 
 import { useEffect, useState } from 'react';
+import { getFirestore, doc, deleteDoc } from 'firebase/firestore';
 
 const sec = 1000;
 const min = sec * 60;
@@ -8,9 +11,14 @@ const hour = min * 60;
 const day = hour * 24;
 
 export default function Todo(props) {
-  const end = new Date(props.date.replaceAll('-', '/'));
+  const { title, date, id } = props;
+
+  const end = new Date(date.replaceAll('-', '/'));
 
   const [timeLeft, setTimeLeft] = useState(end - new Date());
+
+  const db = getFirestore();
+  const todoRef = doc(db, 'todos', id);
 
   // update time left every tenth of a second
   useEffect(() => {
@@ -20,6 +28,12 @@ export default function Todo(props) {
     }, 100);
     return () => clearInterval(interval);
   }, []);
+
+  // deletes current todo from firebase
+  async function deleteTodo() {
+    if (!window.confirm(`Delete ${title}?`)) return;
+    await deleteDoc(todoRef);
+  }
 
   function Countdown() {
     return (
@@ -34,9 +48,12 @@ export default function Todo(props) {
 
   return (
     <div className={styles.container}>
-      <h1>{props.title}</h1>
-      <p>{props.date}</p>
+      <h1>{title}</h1>
+      <p>{date}</p>
       <Countdown />
+      <button onClick={deleteTodo}>
+        <DeleteIcon />
+      </button>
     </div>
   );
 }
