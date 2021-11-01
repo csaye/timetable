@@ -29,10 +29,10 @@ export default function Day(props) {
         {
           todos &&
           todos.map(todo =>
-            <div key={todo.id}>
+            <div className={styles.todo} key={todo.id}>
               {todo.title}
               <button onClick={() => deleteTodo(todo)}>
-                <DeleteIcon />
+                <DeleteIcon fontSize="small" />
               </button>
             </div>
           )
