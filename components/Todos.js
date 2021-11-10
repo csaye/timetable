@@ -40,10 +40,12 @@ export default function Todos() {
 
   return (
     <div className={styles.container}>
-      <button onClick={() => {
-        resetModal();
-        setModalOpen(true);
-      }}>+</button>
+      <div className={styles.head}>
+        <button onClick={() => {
+          resetModal();
+          setModalOpen(true);
+        }}>+</button>
+      </div>
       <div className={styles.todos}>
         {
           todos &&

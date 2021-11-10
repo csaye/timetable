@@ -2,6 +2,12 @@
   width: 50%;
 }
 
+.head {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
 .todos {
   display: flex;
   flex-direction: column;
