@@ -22,8 +22,10 @@ export default function Home(props) {
   return (
     <div className={styles.container}>
       <Header />
-      <Todos />
-      <Calendar />
+      <div className={styles.content}>
+        <Calendar />
+        <Todos />
+      </div>
     </div>
   );
 }

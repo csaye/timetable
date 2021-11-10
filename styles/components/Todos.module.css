@@ -1,3 +1,7 @@
+.container {
+  width: 1200px;
+}
+
 .todos {
   display: flex;
   flex-wrap: wrap;
