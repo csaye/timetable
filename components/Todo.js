@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import styles from '../styles/components/Todo.module.css';
 
 import { useEffect, useState } from 'react';
-import { getFirestore, doc, deleteDoc } from 'firebase/firestore';
+import { getFirestore, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 
 const sec = 1000;
 const min = sec * 60;
@@ -40,6 +40,17 @@ export default function Todo(props) {
     await deleteDoc(todoRef);
   }
 
+  // updates todo in firebase
+  async function updateTodo() {
+    setModalOpen(false);
+    await updateDoc(todoRef, { title: newTitle });
+  }
+
+  // resets modal values
+  function resetModal() {
+    setNewTitle(title);
+  }
+
   function Countdown() {
     return (
       <>
@@ -58,7 +69,10 @@ export default function Todo(props) {
       <Countdown />
       <button
         className={styles.editbutton}
-        onClick={() => setModalOpen(true)}
+        onClick={() => {
+          resetModal();
+          setModalOpen(true);
+        }}
       >
         <EditIcon />
       </button>
