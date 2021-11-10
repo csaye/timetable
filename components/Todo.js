@@ -1,3 +1,5 @@
+import Modal from './Modal';
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import styles from '../styles/components/Todo.module.css';
@@ -16,6 +18,7 @@ export default function Todo(props) {
   const end = new Date(date.replaceAll('-', '/'));
 
   const [timeLeft, setTimeLeft] = useState(end - new Date());
+  const [modalOpen, setModalOpen] = useState(false);
 
   const db = getFirestore();
   const todoRef = doc(db, 'todos', id);
@@ -51,12 +54,17 @@ export default function Todo(props) {
       <h1>{title}</h1>
       <p>{date}</p>
       <Countdown />
-      <button
-        className={styles.deletebutton}
-        onClick={deleteTodo}
-      >
-        <DeleteIcon fontSize="small" />
+      <button onClick={() => setModalOpen(true)}>
+        <EditIcon />
       </button>
+      <Modal open={modalOpen} setOpen={setModalOpen}>
+        <div>
+          <h1>Editing Todo</h1>
+          <button onClick={deleteTodo}>
+            <DeleteIcon />
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
