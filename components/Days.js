@@ -37,9 +37,7 @@ export default function Days(props) {
     days.map((day, i) =>
       <Day
         todos={todos ? getTodos(day) : undefined}
-        day={day}
-        month={month}
-        year={year}
+        day={day} month={month} year={year}
         key={i}
       />
     )
