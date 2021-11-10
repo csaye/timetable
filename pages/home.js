@@ -1,23 +1,15 @@
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import Todos from '../components/Todos';
-import Days from '../components/Days';
+import Calendar from '../components/Calendar';
 import Router from 'next/router';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import styles from '../styles/pages/Home.module.css';
 
-const now = new Date();
-const dayNames = [
-  'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-];
-
 export default function Home(props) {
   const { authed } = props;
-
-  const [year, setYear] = useState(now.getFullYear());
-  const [month, setMonth] = useState(now.getMonth());
 
   // moves calendar back one month
   function backMonth() {
@@ -39,14 +31,6 @@ export default function Home(props) {
     }
   }
 
-  // returns the offset of the current month
-  function monthOffset() {
-    const firstOfMonth = new Date(year, month, 1);
-    return firstOfMonth.getDay();
-  }
-
-  const fillers = Array(monthOffset()).fill(0);
-
   // listen for routing
   useEffect(() => {
     if (authed === false) Router.push('/');
@@ -61,26 +45,7 @@ export default function Home(props) {
       <button onClick={backMonth}>{'<'}</button>
       <button onClick={forwardMonth}>{'>'}</button>
       <Todos />
-      <h1>
-        {new Date(year, month, 1).toLocaleString('default', { month: 'long' })}
-        {' '}
-        {year}
-      </h1>
-      <div className={styles.calendar}>
-        {
-          dayNames.map((dayName, i) =>
-            <div className="daybox" key={i}>
-              <h3>{dayName}</h3>
-            </div>
-          )
-        }
-        {
-          fillers.map((filler, i) =>
-            <span className="daybox" key={i} />
-          )
-        }
-        <Days month={month} year={year} />
-      </div>
+      <Calendar />
     </div>
   );
 }
