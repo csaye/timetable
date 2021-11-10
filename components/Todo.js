@@ -54,10 +54,20 @@ export default function Todo(props) {
   function Countdown() {
     return (
       <>
-        {timeLeft > day && <>{Math.floor(timeLeft / day)}<span>d</span></>}
-        {timeLeft > hour && <>{Math.floor(timeLeft % day / hour)}<span>h</span></>}
-        {timeLeft > min && <>{Math.floor(timeLeft % day % hour / min)}<span>m</span></>}
-        {Math.floor(timeLeft % day % hour % min / sec)}<span>s</span>
+        {
+          Math.abs(timeLeft) > day &&
+          <>{Math.floor(Math.abs(timeLeft) / day)}<span>d</span></>
+        }
+        {
+          Math.abs(timeLeft) > hour &&
+          <>{Math.floor(Math.abs(timeLeft) % day / hour)}<span>h</span></>
+        }
+        {
+          Math.abs(timeLeft) > min &&
+          <>{Math.floor(Math.abs(timeLeft) % day % hour / min)}<span>m</span></>
+        }
+        {Math.floor(Math.abs(timeLeft) % day % hour % min / sec)}<span>s</span>
+        {timeLeft < 0 && ' ago'}
       </>
     );
   }
