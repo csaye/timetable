@@ -15,9 +15,9 @@
   margin: 0;
 }
 
-.deletebutton {
+.editbutton {
   position: absolute;
-  right: 8px;
+  right: 16px;
   top: 0;
   width: 16px;
   height: 16px;
@@ -26,10 +26,10 @@
   opacity: 0;
 }
 
-.container:hover > .deletebutton {
+.container:hover > .editbutton {
   opacity: 1;
 }
 
-.deletebutton:hover {
+.editbutton:hover {
   color: #2196f3;
 }

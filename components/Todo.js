@@ -54,16 +54,17 @@ export default function Todo(props) {
       <h1>{title}</h1>
       <p>{date}</p>
       <Countdown />
-      <button onClick={() => setModalOpen(true)}>
+      <button
+        className={styles.editbutton}
+        onClick={() => setModalOpen(true)}
+      >
         <EditIcon />
       </button>
       <Modal open={modalOpen} setOpen={setModalOpen}>
-        <div>
-          <h1>Editing Todo</h1>
-          <button onClick={deleteTodo}>
-            <DeleteIcon />
-          </button>
-        </div>
+        <h1>Editing Todo</h1>
+        <button className="iconbutton" onClick={deleteTodo}>
+          <DeleteIcon />
+        </button>
       </Modal>
     </div>
   );
