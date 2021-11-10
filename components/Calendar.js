@@ -2,6 +2,8 @@ import Days from '../components/Days';
 
 import { useState } from 'react';
 
+import styles from '../styles/components/Calendar.module.css';
+
 const dayNames = [
   'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 ];
@@ -21,25 +23,27 @@ export default function Calendar() {
   const fillers = Array(monthOffset()).fill(0);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>
         {new Date(year, month, 1).toLocaleString('default', { month: 'long' })}
         {' '}
         {year}
       </h1>
-      {
-        dayNames.map((dayName, i) =>
-          <div className="daybox" key={i}>
-            <h3>{dayName}</h3>
-          </div>
-        )
-      }
-      {
-        fillers.map((filler, i) =>
-          <span className="daybox" key={i} />
-        )
-      }
-      <Days month={month} year={year} />
+      <div className={styles.boxes}>
+        {
+          dayNames.map((dayName, i) =>
+            <div className="daybox" key={i}>
+              <h3>{dayName}</h3>
+            </div>
+          )
+        }
+        {
+          fillers.map((filler, i) =>
+            <span className="daybox" key={i} />
+          )
+        }
+        <Days month={month} year={year} />
+      </div>
     </div>
   );
 }
