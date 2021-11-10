@@ -18,7 +18,9 @@ export default function Todo(props) {
   const end = new Date(date.replaceAll('-', '/'));
 
   const [timeLeft, setTimeLeft] = useState(end - new Date());
+
   const [modalOpen, setModalOpen] = useState(false);
+  const [newTitle, setNewTitle] = useState(title);
 
   const db = getFirestore();
   const todoRef = doc(db, 'todos', id);
@@ -62,6 +64,19 @@ export default function Todo(props) {
       </button>
       <Modal open={modalOpen} setOpen={setModalOpen}>
         <h1>Editing Todo</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          updateTodo();
+        }}>
+          <input
+            value={newTitle}
+            onChange={e => setNewTitle(e.target.value)}
+            required
+          />
+          <button className="graybutton">
+            Update
+          </button>
+        </form>
         <button className="iconbutton" onClick={deleteTodo}>
           <DeleteIcon />
         </button>
