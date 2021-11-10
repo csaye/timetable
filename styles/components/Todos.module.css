@@ -11,8 +11,9 @@
 .todos {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  margin: 10px;
+  padding: 10px;
+  height: calc(100% - 60px);
+  overflow: scroll;
 }
 
 .todoform {

@@ -18,7 +18,7 @@ a {
   text-decoration: none;
 }
 
-button {
+button, label, input[type='checkbox'] {
   cursor: pointer;
 }
 
@@ -49,4 +49,10 @@ button {
   height: 60px;
   background: #ddd;
   margin: 10px;
+}
+
+.daybox > h3 {
+  text-wrap: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
