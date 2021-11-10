@@ -11,26 +11,6 @@ import styles from '../styles/pages/Home.module.css';
 export default function Home(props) {
   const { authed } = props;
 
-  // moves calendar back one month
-  function backMonth() {
-    if (month === 0) {
-      setMonth(11);
-      setYear(year - 1);
-    } else {
-      setMonth(month - 1);
-    }
-  }
-
-  // moves calendar forward one month
-  function forwardMonth() {
-    if (month === 11) {
-      setMonth(0);
-      setYear(year + 1);
-    } else {
-      setMonth(month + 1);
-    }
-  }
-
   // listen for routing
   useEffect(() => {
     if (authed === false) Router.push('/');
@@ -42,8 +22,6 @@ export default function Home(props) {
   return (
     <div className={styles.container}>
       <Header />
-      <button onClick={backMonth}>{'<'}</button>
-      <button onClick={forwardMonth}>{'>'}</button>
       <Todos />
       <Calendar />
     </div>
