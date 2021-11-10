@@ -16,6 +16,7 @@ export default function Todos() {
   const auth = getAuth();
   const db = getFirestore();
 
+  const [showPast, setShowPast] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
@@ -45,11 +46,21 @@ export default function Todos() {
           resetModal();
           setModalOpen(true);
         }}>+</button>
+        <label>
+          Show Past Todos
+          <input
+            type="checkbox"
+            value={showPast}
+            onChange={e => setShowPast(e.target.checked)}
+          />
+        </label>
       </div>
       <div className={styles.todos}>
         {
           todos &&
-          todos.filter(todo => new Date(todo.date) > now).map(todo =>
+          todos.filter(todo =>
+            showPast ? true : new Date(todo.date) > now
+          ).map(todo =>
             <Todo {...todo} key={todo.id} />
           )
         }
