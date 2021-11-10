@@ -1,3 +1,12 @@
+.container {
+  width: 100%;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+}
+
 .boxes {
   display: flex;
   flex-wrap: wrap;

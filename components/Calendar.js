@@ -44,13 +44,15 @@ export default function Calendar() {
 
   return (
     <div className={styles.container}>
-      <button onClick={backMonth}>{'<'}</button>
-      <button onClick={forwardMonth}>{'>'}</button>
-      <h1>
-        {new Date(year, month, 1).toLocaleString('default', { month: 'long' })}
-        {' '}
-        {year}
-      </h1>
+      <div className={styles.head}>
+        <button onClick={backMonth}>{'<'}</button>
+        <button onClick={forwardMonth}>{'>'}</button>
+        <h1>
+          {new Date(year, month, 1).toLocaleString('default', { month: 'long' })}
+          {' '}
+          {year}
+        </h1>
+      </div>
       <div className={styles.boxes}>
         {
           dayNames.map((dayName, i) =>

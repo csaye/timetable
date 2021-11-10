@@ -1,9 +1,10 @@
 .container {
-  width: 1200px;
+  width: 50%;
 }
 
 .todos {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   margin: 10px;
 }
