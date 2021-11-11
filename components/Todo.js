@@ -15,24 +15,26 @@ const day = hour * 24;
 export default function Todo(props) {
   const { title, date, id } = props;
 
-  const end = new Date(date.replaceAll('-', '/'));
-
-  const [timeLeft, setTimeLeft] = useState(end - new Date());
+  const [timeLeft, setTimeLeft] = useState(
+    new Date(date.replaceAll('-', '/')) - new Date()
+  );
 
   const [modalOpen, setModalOpen] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
+  const [newDate, setNewDate] = useState(date);
 
   const db = getFirestore();
   const todoRef = doc(db, 'todos', id);
 
   // update time left every tenth of a second
   useEffect(() => {
+    const end = new Date(date.replaceAll('-', '/'));
     setTimeLeft(end - new Date());
     const interval = setInterval(() => {
       setTimeLeft(end - new Date());
     }, 100);
     return () => clearInterval(interval);
-  }, []);
+  }, [date]);
 
   // deletes current todo from firebase
   async function deleteTodo() {
@@ -43,7 +45,10 @@ export default function Todo(props) {
   // updates todo in firebase
   async function updateTodo() {
     setModalOpen(false);
-    await updateDoc(todoRef, { title: newTitle });
+    await updateDoc(todoRef, {
+      title: newTitle,
+      date: newDate
+    });
   }
 
   // resets modal values
@@ -95,6 +100,12 @@ export default function Todo(props) {
           <input
             value={newTitle}
             onChange={e => setNewTitle(e.target.value)}
+            required
+          />
+          <input
+            type="date"
+            value={newDate}
+            onChange={e => setNewDate(e.target.value)}
             required
           />
           <button className="graybutton">
