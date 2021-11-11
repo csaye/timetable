@@ -1,6 +1,8 @@
 import DeleteIcon from '@mui/icons-material/Delete';
+import Modal from './Modal';
 
 import { getFirestore, doc, deleteDoc } from 'firebase/firestore';
+import { useState } from 'react';
 
 import styles from '../styles/components/Day.module.css';
 
@@ -9,7 +11,12 @@ const now = new Date();
 export default function Day(props) {
   const { day, month, year, todos } = props;
 
+  const [modalOpen, setModalOpen] = useState(false);
+
   const db = getFirestore();
+
+  const monthName = new Date(year, month, 1)
+  .toLocaleString('default', { month: 'long' });
 
   // returns whether current date is today
   function isToday() {
@@ -26,9 +33,13 @@ export default function Day(props) {
   }
 
   return (
-    <div className={
+    <>
+    <div
+      className={
       `daybox ${styles.container} ${isToday() && styles.selected}`
-    }>
+      }
+      onClick={() => setModalOpen(true)}
+    >
       <h1>{day}</h1>
       <div className={styles.todos}>
         {
@@ -36,13 +47,14 @@ export default function Day(props) {
           todos.map(todo =>
             <div className={styles.todo} key={todo.id}>
               {todo.title}
-              <button onClick={() => deleteTodo(todo)}>
-                <DeleteIcon fontSize="small" />
-              </button>
             </div>
           )
         }
       </div>
     </div>
+    <Modal open={modalOpen} setOpen={setModalOpen}>
+      <h1>{day} {monthName} {year}</h1>
+    </Modal>
+    </>
   );
 }
