@@ -1,6 +1,7 @@
 .container {
   padding: 10px;
   overflow: scroll;
+  cursor: pointer;
 }
 
 .container.selected {

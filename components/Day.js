@@ -54,6 +54,16 @@ export default function Day(props) {
       </div>
       <Modal open={modalOpen} setOpen={setModalOpen}>
         <h1>{day} {monthName} {year}</h1>
+        <div>
+          {
+            todos &&
+            todos.map(todo =>
+              <div key={todo.id}>
+                {todo.title}
+              </div>
+            )
+          }
+        </div>
       </Modal>
     </>
   );

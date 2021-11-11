@@ -45,14 +45,16 @@ button, label, input[type='checkbox'] {
 }
 
 .daybox {
-  width: calc(100% / 7 - 20px);
+  width: calc(100% / 7 - 10px);
   height: 60px;
   background: #ddd;
-  margin: 10px;
+  margin: 5px;
+  border-radius: 10px;
 }
 
 .daybox > h3 {
   text-wrap: none;
   text-overflow: ellipsis;
   overflow: hidden;
+  padding: 0 10px;
 }
