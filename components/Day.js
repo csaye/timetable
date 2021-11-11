@@ -34,27 +34,27 @@ export default function Day(props) {
 
   return (
     <>
-    <div
-      className={
-      `daybox ${styles.container} ${isToday() && styles.selected}`
-      }
-      onClick={() => setModalOpen(true)}
-    >
-      <h1>{day}</h1>
-      <div className={styles.todos}>
-        {
-          todos &&
-          todos.map(todo =>
-            <div className={styles.todo} key={todo.id}>
-              {todo.title}
-            </div>
-          )
+      <div
+        className={
+        `daybox ${styles.container} ${isToday() && styles.selected}`
         }
+        onClick={() => setModalOpen(true)}
+      >
+        <h1>{day}</h1>
+        <div className={styles.todos}>
+          {
+            todos &&
+            todos.map(todo =>
+              <div className={styles.todo} key={todo.id}>
+                {todo.title}
+              </div>
+            )
+          }
+        </div>
       </div>
-    </div>
-    <Modal open={modalOpen} setOpen={setModalOpen}>
-      <h1>{day} {monthName} {year}</h1>
-    </Modal>
+      <Modal open={modalOpen} setOpen={setModalOpen}>
+        <h1>{day} {monthName} {year}</h1>
+      </Modal>
     </>
   );
 }
