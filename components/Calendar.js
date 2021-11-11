@@ -1,4 +1,6 @@
 import Days from '../components/Days';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 import { useState } from 'react';
 
@@ -45,8 +47,12 @@ export default function Calendar() {
   return (
     <div className={styles.container}>
       <div className={styles.head}>
-        <button onClick={backMonth}>{'<'}</button>
-        <button onClick={forwardMonth}>{'>'}</button>
+        <button onClick={backMonth}>
+          <KeyboardArrowLeftIcon fontSize="large" />
+        </button>
+        <button onClick={forwardMonth}>
+          <KeyboardArrowRightIcon fontSize="large" />
+        </button>
         <h1>
           {new Date(year, month, 1).toLocaleString('default', { month: 'long' })}
           {' '}

@@ -8,6 +8,22 @@
   height: 60px;
 }
 
+.head > button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.head > button:first-of-type {
+  margin-left: 10px;
+}
+
+.head > button:last-of-type {
+  margin-right: 10px;
+}
+
 .boxes {
   display: flex;
   flex-wrap: wrap;
