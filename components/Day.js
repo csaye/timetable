@@ -1,7 +1,10 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from './Modal';
 
-import { getFirestore, doc, deleteDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import {
+  getFirestore, doc, addDoc, deleteDoc, collection
+} from 'firebase/firestore';
 import { useState } from 'react';
 
 import styles from '../styles/components/Day.module.css';
@@ -12,6 +15,7 @@ export default function Day(props) {
   const { day, month, year, todos } = props;
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [title, setTitle] = useState('');
 
   const db = getFirestore();
 
@@ -64,6 +68,20 @@ export default function Day(props) {
             )
           }
         </div>
+        <form onSubmit={e => {
+          e.preventDefault();
+          createTodo();
+        }}>
+          <input
+            placeholder="title"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            required
+          />
+          <button>
+            Create
+          </button>
+        </form>
       </Modal>
     </>
   );
