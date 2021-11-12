@@ -14,6 +14,8 @@ const now = new Date();
 export default function Day(props) {
   const { day, month, year, todos } = props;
 
+  const auth = getAuth();
+
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState('');
 
@@ -36,13 +38,32 @@ export default function Day(props) {
     await deleteDoc(todoRef);
   }
 
+  // creates todo of current day
+  async function createTodo() {
+    const todosRef = collection(db, 'todos');
+    setModalOpen(false);
+    await addDoc(todosRef, {
+      date: `${year}-${month + 1}-${day}`,
+      title: title,
+      uid: auth.currentUser.uid
+    });
+  }
+
+  // resets modal data
+  function resetModal() {
+    setTitle('');
+  }
+
   return (
     <>
       <div
         className={
         `daybox ${styles.container} ${isToday() && styles.selected}`
         }
-        onClick={() => setModalOpen(true)}
+        onClick={() => {
+          resetModal();
+          setModalOpen(true);
+        }}
       >
         <h1>{day}</h1>
         <div className={styles.todos}>
