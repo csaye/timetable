@@ -29,3 +29,11 @@
   flex-wrap: wrap;
   margin: 10px;
 }
+
+.dayname {
+  background: #bbb;
+}
+
+.filler {
+  opacity: 0;
+}

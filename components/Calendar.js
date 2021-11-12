@@ -62,14 +62,14 @@ export default function Calendar() {
       <div className={styles.boxes}>
         {
           dayNames.map((dayName, i) =>
-            <div className="daybox" key={i}>
+            <div className={`daybox ${styles.dayname}`} key={i}>
               <h3>{dayName}</h3>
             </div>
           )
         }
         {
           fillers.map((filler, i) =>
-            <span className="daybox" key={i} />
+            <span className={`daybox ${styles.filler}`} key={i} />
           )
         }
         <Days month={month} year={year} />
