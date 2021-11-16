@@ -7,6 +7,7 @@ import styles from '../styles/components/Todo.module.css';
 import { useEffect, useState } from 'react';
 import { getFirestore, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 
+// time intervals
 const sec = 1000;
 const min = sec * 60;
 const hour = min * 60;
@@ -26,14 +27,10 @@ export default function Todo(props) {
   const db = getFirestore();
   const todoRef = doc(db, 'todos', id);
 
-  // update time left every tenth of a second
+  // // update time left when date changes
   useEffect(() => {
     const end = new Date(date.replaceAll('-', '/'));
     setTimeLeft(end - new Date());
-    const interval = setInterval(() => {
-      setTimeLeft(end - new Date());
-    }, 100);
-    return () => clearInterval(interval);
   }, [date]);
 
   // deletes current todo from firebase
@@ -60,18 +57,10 @@ export default function Todo(props) {
     return (
       <>
         {
-          Math.abs(timeLeft) > day &&
-          <>{Math.floor(Math.abs(timeLeft) / day)}<span>d</span></>
-        }
-        {
-          Math.abs(timeLeft) > hour &&
+          Math.abs(timeLeft) > day ?
+          <>{Math.floor(Math.abs(timeLeft) / day)}<span>d</span></> :
           <>{Math.floor(Math.abs(timeLeft) % day / hour)}<span>h</span></>
         }
-        {
-          Math.abs(timeLeft) > min &&
-          <>{Math.floor(Math.abs(timeLeft) % day % hour / min)}<span>m</span></>
-        }
-        {Math.floor(Math.abs(timeLeft) % day % hour % min / sec)}<span>s</span>
         {timeLeft < 0 && ' ago'}
       </>
     );
