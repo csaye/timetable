@@ -2,12 +2,33 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from './Modal';
 
 import { useState } from 'react';
+import { getFirestore, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 
 import styles from '../styles/components/TodoModal.module.css';
 
-export default function TodoModal() {
-  const [newTitle, setNewTitle] = useState(title);
-  const [newDate, setNewDate] = useState(date);
+export default function TodoModal(props) {
+  const { todo, modalOpen, setModalOpen } = props;
+
+  const [newTitle, setNewTitle] = useState(todo.title);
+  const [newDate, setNewDate] = useState(todo.date);
+
+  const db = getFirestore();
+  const todoRef = doc(db, 'todos', todo.id);
+
+  // updates todo in firebase
+  async function updateTodo() {
+    setModalOpen(false);
+    await updateDoc(todoRef, {
+      title: newTitle,
+      date: newDate
+    });
+  }
+
+  // deletes current todo from firebase
+  async function deleteTodo() {
+    if (!window.confirm(`Delete ${todo.title}?`)) return;
+    await deleteDoc(todoRef);
+  }
 
   return (
     <Modal open={modalOpen} setOpen={setModalOpen}>
