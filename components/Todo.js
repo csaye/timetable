@@ -4,6 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import styles from '../styles/components/Todo.module.css';
 
 import { useEffect, useState } from 'react';
+import { datetimeString } from '../util/formatDate';
 
 // time intervals
 const sec = 1000;
@@ -42,7 +43,7 @@ export default function Todo(props) {
   return (
     <div className={styles.container}>
       <h1>{title}</h1>
-      <p>{date} {time}</p>
+      <p>{datetimeString(new Date(datetime))}</p>
       <Countdown />
       <button
         className={styles.editbutton}

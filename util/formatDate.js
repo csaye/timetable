@@ -16,3 +16,8 @@ export function timeString(date) {
   if (minute.length < 2) minute = '0' + minute;
   return [hour, minute].join(':');
 }
+
+// returns a datetime string in yyyy-mm-dd hh:mm format
+export function datetimeString(date) {
+  return `${dateString(date)} ${timeString(date)}`;
+}
