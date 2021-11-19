@@ -12,19 +12,19 @@ const hour = min * 60;
 const day = hour * 24;
 
 export default function Todo(props) {
-  const { title, date, id } = props;
+  const { title, due, id } = props;
 
   const [timeLeft, setTimeLeft] = useState(
-    new Date(date.replaceAll('-', '/')) - new Date()
+    new Date(due) - new Date()
   );
 
   const [modalOpen, setModalOpen] = useState(false);
 
   // // update time left when date changes
   useEffect(() => {
-    const end = new Date(date.replaceAll('-', '/'));
+    const end = new Date(due);
     setTimeLeft(end - new Date());
-  }, [date]);
+  }, [due]);
 
   function Countdown() {
     return (
@@ -42,7 +42,7 @@ export default function Todo(props) {
   return (
     <div className={styles.container}>
       <h1>{title}</h1>
-      <p>{date}</p>
+      <p>{due}</p>
       <Countdown />
       <button
         className={styles.editbutton}

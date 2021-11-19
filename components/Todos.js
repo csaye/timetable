@@ -32,10 +32,9 @@ export default function Todos() {
   // creates new todo in firebase
   async function createTodo() {
     const uid = auth.currentUser.uid;
-    await addDoc(todosRef, {
-      title, uid,
-      date: `${date} ${time}`
-    });
+    const cleanDate = date.replaceAll('-', '/');
+    const due = isTime ? `${cleanDate} ${time}` : cleanDate;
+    await addDoc(todosRef, { title, uid, due });
   }
 
   // resets modal

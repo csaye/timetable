@@ -10,7 +10,7 @@ export default function TodoModal(props) {
   const { todo, modalOpen, setModalOpen } = props;
 
   const [newTitle, setNewTitle] = useState(todo.title);
-  const [newDate, setNewDate] = useState(todo.date);
+  const [newDate, setNewDate] = useState(todo.due);
 
   const db = getFirestore();
   const todoRef = doc(db, 'todos', todo.id);
