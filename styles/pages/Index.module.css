@@ -3,9 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-image: url('/img/station.jpg');
-  background-size: cover;
-  background-position: center center;
+  background: center center / cover url('/img/station.jpg');
 }
 
 .center {

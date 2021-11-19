@@ -1,5 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from './Modal';
+import Todo from './Todo';
 
 import { getAuth } from 'firebase/auth';
 import {
@@ -83,9 +84,7 @@ export default function Day(props) {
           {
             todos &&
             todos.map(todo =>
-              <div key={todo.id}>
-                {todo.title}
-              </div>
+              <Todo {...todo} key={todo.id} />
             )
           }
         </div>
