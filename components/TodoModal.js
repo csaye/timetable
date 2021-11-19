@@ -53,6 +53,7 @@ export default function TodoModal(props) {
           type="time"
           value={newTime}
           onChange={e => setNewTime(e.target.value)}
+          required
         />
         <button className="graybutton">
           Update

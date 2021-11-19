@@ -21,7 +21,6 @@ export default function Todos() {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [isTime, setIsTime] = useState(false)
 
   // get todos
   const uid = auth.currentUser.uid;
@@ -94,23 +93,12 @@ export default function Todos() {
             onChange={e => setDate(e.target.value)}
             required
           />
-          <label>
-            Time
-            <input
-              type="checkbox"
-              checked={isTime}
-              onChange={e => setIsTime(e.target.checked)}
-            />
-          </label>
-          {
-            isTime &&
-            <input
-              type="time"
-              value={time}
-              onChange={e => setTime(e.target.value)}
-              required
-            />
-          }
+          <input
+            type="time"
+            value={time}
+            onChange={e => setTime(e.target.value)}
+            required
+          />
           <button className="graybutton">Create</button>
         </form>
       </Modal>
