@@ -3,6 +3,7 @@ import Day from './Day';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, collection, query, where } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase9-hooks/firestore';
+import { dateString } from '../util/formatDate';
 
 export default function Days(props) {
   const { month, year } = props;
@@ -28,7 +29,10 @@ export default function Days(props) {
   // returns todos for given day
   function getTodos(day) {
     return todos.filter(todo => {
-      const [y, m, d] = todo.date.split('/').map(val => parseInt(val));
+      const [y, m, d] =
+        dateString(new Date(todo.datetime))
+        .split('-')
+        .map(val => parseInt(val));
       return y === year && m - 1 === month && d === day;
     });
   }

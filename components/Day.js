@@ -44,7 +44,7 @@ export default function Day(props) {
     const todosRef = collection(db, 'todos');
     setModalOpen(false);
     await addDoc(todosRef, {
-      date: `${year}-${month + 1}-${day}`,
+      datetime: new Date(`${year}-${month + 1}-${day} 00:00`).getTime(),
       title: title,
       uid: auth.currentUser.uid
     });

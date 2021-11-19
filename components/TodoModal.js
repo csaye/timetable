@@ -3,6 +3,7 @@ import Modal from './Modal';
 
 import { useState } from 'react';
 import { getFirestore, doc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { dateString, timeString } from '../util/formatDate';
 
 import styles from '../styles/components/TodoModal.module.css';
 
@@ -10,8 +11,8 @@ export default function TodoModal(props) {
   const { todo, modalOpen, setModalOpen } = props;
 
   const [newTitle, setNewTitle] = useState(todo.title);
-  const [newDate, setNewDate] = useState(todo.date);
-  const [newTime, setNewTime] = useState(todo.time);
+  const [newDate, setNewDate] = useState(dateString(new Date(todo.datetime)));
+  const [newTime, setNewTime] = useState(timeString(new Date(todo.datetime)));
 
   const db = getFirestore();
   const todoRef = doc(db, 'todos', todo.id);
@@ -19,9 +20,10 @@ export default function TodoModal(props) {
   // updates todo in firebase
   async function updateTodo() {
     setModalOpen(false);
+    const newDatetime = new Date(`${newDate} ${newTime}`).getTime();
     await updateDoc(todoRef, {
       title: newTitle,
-      date: newDate.replaceAll('-', '/')
+      datetime: newDatetime
     });
   }
 
