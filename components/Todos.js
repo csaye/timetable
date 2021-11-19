@@ -20,6 +20,7 @@ export default function Todos() {
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
 
   // get todos
   const uid = auth.currentUser.uid;
@@ -30,13 +31,17 @@ export default function Todos() {
   // creates new todo in firebase
   async function createTodo() {
     const uid = auth.currentUser.uid;
-    await addDoc(todosRef, { title, date, uid });
+    await addDoc(todosRef, {
+      title, uid,
+      date: `${date} ${time}`
+    });
   }
 
   // resets modal
   function resetModal() {
     setTitle('');
     setDate('');
+    setTime('');
   }
 
   return (
@@ -85,6 +90,12 @@ export default function Todos() {
             type="date"
             value={date}
             onChange={e => setDate(e.target.value)}
+            required
+          />
+          <input
+            type="time"
+            value={time}
+            onChange={e => setTime(e.target.value)}
             required
           />
           <button className="graybutton">Create</button>
