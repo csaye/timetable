@@ -10,7 +10,8 @@ export default function TodoModal(props) {
   const { todo, modalOpen, setModalOpen } = props;
 
   const [newTitle, setNewTitle] = useState(todo.title);
-  const [newDate, setNewDate] = useState(todo.due);
+  const [newDate, setNewDate] = useState(todo.date);
+  const [newTime, setNewTime] = useState(todo.time);
 
   const db = getFirestore();
   const todoRef = doc(db, 'todos', todo.id);
@@ -20,7 +21,7 @@ export default function TodoModal(props) {
     setModalOpen(false);
     await updateDoc(todoRef, {
       title: newTitle,
-      date: newDate
+      date: newDate.replaceAll('-', '/')
     });
   }
 
@@ -47,6 +48,11 @@ export default function TodoModal(props) {
           value={newDate}
           onChange={e => setNewDate(e.target.value)}
           required
+        />
+        <input
+          type="time"
+          value={newTime}
+          onChange={e => setNewTime(e.target.value)}
         />
         <button className="graybutton">
           Update

@@ -28,8 +28,7 @@ export default function Days(props) {
   // returns todos for given day
   function getTodos(day) {
     return todos.filter(todo => {
-      const [y, m, d] = todo.due
-      .split(' ')[0].split('/').map(val => parseInt(val));
+      const [y, m, d] = todo.date.split('/').map(val => parseInt(val));
       return y === year && m - 1 === month && d === day;
     });
   }
