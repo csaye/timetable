@@ -13,28 +13,22 @@ const hour = min * 60;
 const day = hour * 24;
 
 export default function Todo(props) {
-  const { title, date, time, id } = props;
+  const { title, datetime, id } = props;
 
-  const [timeLeft, setTimeLeft] = useState(
-    new Date(time ? `${date} ${time}` : date) - new Date()
-  );
+  const [timeLeft, setTimeLeft] = useState(new Date(datetime) - new Date());
 
   const [modalOpen, setModalOpen] = useState(false);
 
   // // update time left when date changes
   useEffect(() => {
-    const end = new Date(time ? `${date} ${time}` : date);
-    setTimeLeft(end - new Date());
-  }, [date, time]);
+    setTimeLeft(new Date(datetime) - new Date());
+  }, [datetime]);
 
   function Countdown() {
     return (
       <>
-        {
-          Math.abs(timeLeft) > day ?
-          <>{Math.floor(Math.abs(timeLeft) / day)}<span>d</span></> :
-          <>{Math.floor(Math.abs(timeLeft) % day / hour)}<span>h</span></>
-        }
+        {Math.floor(Math.abs(timeLeft) / day)}<span>d</span>
+        {Math.floor(Math.abs(timeLeft) % day / hour)}<span>h</span>
         {timeLeft < 0 && ' ago'}
       </>
     );
