@@ -7,6 +7,7 @@ import {
 } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase9-hooks/firestore';
 import { useState } from 'react';
+import { dateString } from '../util/formatDate';
 
 import styles from '../styles/components/Todos.module.css';
 
@@ -25,24 +26,23 @@ export default function Todos() {
   // get todos
   const uid = auth.currentUser.uid;
   const todosRef = collection(db, 'todos');
-  const todosQuery = query(todosRef, where('uid', '==', uid), orderBy('date'));
+  const todosQuery = query(
+    todosRef, where('uid', '==', uid), orderBy('datetime')
+  );
   const [todos] = useCollectionData(todosQuery, { idField: 'id' });
 
   // creates new todo in firebase
   async function createTodo() {
     const uid = auth.currentUser.uid;
-    await addDoc(todosRef, {
-      title, uid,
-      date: date.replaceAll('-', '/'),
-      time: isTime ? time : null
-    });
+    const datetime = new Date(`${date} ${time}`).getTime();
+    await addDoc(todosRef, { title, uid, datetime });
   }
 
   // resets modal
   function resetModal() {
     setTitle('');
-    setDate('');
-    setTime('');
+    setDate(dateString(new Date()));
+    setTime('00:00:00');
   }
 
   return (
@@ -65,7 +65,7 @@ export default function Todos() {
         {
           todos &&
           todos.filter(todo =>
-            showPast ? true : new Date(todo.date) > now
+            showPast ? true : new Date(todo.datetime) > now
           ).map(todo =>
             <Todo {...todo} key={todo.id} />
           )
