@@ -58,3 +58,8 @@ button, label, input[type='checkbox'] {
   overflow: hidden;
   padding: 0 10px;
 }
+
+:root {
+  --blue: #3aaaf2;
+  --darkblue: #0f97eb;
+}

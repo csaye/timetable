@@ -10,9 +10,34 @@
   text-align: center;
   background: #efefef;
   border-radius: 20px;
-  padding: 20px 60px;
+  padding: 20px 40px;
+  box-shadow: 0 0 10px #000;
+}
+
+.center > h1 {
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  margin: 0 0 16px 0;
+}
+
+.center > h1 > div {
+  margin-right: 5px!important;
 }
 
 .center > button {
-  padding: 10px 20px;
+  padding: 15px 35px;
+  background: var(--blue);
+  border: 0;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.center > button:hover {
+  background: var(--darkblue);
+}
+
+.center > button:active {
+  transform: scale(0.95);
 }
